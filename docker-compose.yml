@@ -1,6 +1,0 @@
-services:
-  dot-hack-telegram-bot:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    restart: always

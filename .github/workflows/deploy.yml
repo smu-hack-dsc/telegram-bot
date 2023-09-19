@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Docker Compose Project
-        run: docker-compose build
+        run: docker build -t dot-hack .
 
       - name: Authenticate to AWS
         run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set region ${{ secrets.AWS_DEFAULT_REGION }}
@@ -23,7 +23,7 @@ jobs:
 
       - name: Tag and Push Docker Image
         run: |
-          docker tag telegram-bot:latest ${{ secrets.AWS_ECR_REGISTRY }}/dot-hack:latest
+          docker tag dot-hack:latest ${{ secrets.AWS_ECR_REGISTRY }}/dot-hack:latest
           docker push ${{ secrets.AWS_ECR_REGISTRY }}/dot-hack:latest
 
       - name: Deploy to Elastic Beanstalk
