@@ -1,0 +1,24 @@
+{
+  "name": "dot-hack-telegram-bot",
+  "version": "1.0.0",
+  "description": "telegram bot for SMU .Hack's telegram group",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "test": ""
+  },
+  "author": "shuoan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.6.2",
+    "@types/node-cron": "^3.0.8",
+    "telegraf": "^4.13.1",
+    "tslint": "^6.1.3",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.2"
+  }
+}
