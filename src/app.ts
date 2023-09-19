@@ -5,10 +5,10 @@ import * as cron from 'node-cron';
 dotenv.config();
 const bot: Telegraf<Context> = new Telegraf(process.env.BOT_TOKEN as string);
 
-let joinedToday: Record<string, boolean> = {};
+let userJoinTimes: Record<string, number> = {};
 
 cron.schedule('0 0 * * *', () => {
-  joinedToday = {}
+  userJoinTimes = {};
 });
 
 bot.on('new_chat_members', (ctx) => {
@@ -16,19 +16,23 @@ bot.on('new_chat_members', (ctx) => {
   const lastJoinedMember = ctx.message.new_chat_members[ctx.message.new_chat_members.length - 1];
   
   if (ctx.message.date && new Date(ctx.message.date * 1000).toDateString() === today) {
-    joinedToday[lastJoinedMember.id] = true;
+    userJoinTimes[lastJoinedMember.id] = ctx.message.date;
   }
 });
 
 bot.on('text', (ctx) => {
   const userId = ctx.from.id.toString();
-  console.log(joinedToday)
-  console.log(userId)
-
-  if (joinedToday[userId]) {
-    ctx.deleteMessage();
-    ctx.reply(`Hi ${ctx.from.username}! To prevent bot spam, we have restricted new users from sending messages temporarily.`);
-    return;
+  
+  if (userJoinTimes[userId]) {
+    const currentTime = Math.floor(Date.now() / 1000);
+    const joinTime = userJoinTimes[userId];
+    
+    console.log(joinTime, currentTime, currentTime - joinTime)
+    if (currentTime - joinTime < 300) {
+      ctx.deleteMessage();
+      ctx.reply(`Hi ${ctx.from.username}! New users are temporarily disabled from sending messages to prevent spam.`);
+      return;
+    }
   }
 });
 
