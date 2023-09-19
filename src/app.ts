@@ -7,10 +7,6 @@ const bot: Telegraf<Context> = new Telegraf(process.env.BOT_TOKEN as string);
 
 let userJoinTimes: Record<string, number> = {};
 
-cron.schedule('0 0 * * *', () => {
-  userJoinTimes = {};
-});
-
 bot.on('new_chat_members', (ctx) => {
   const today = new Date().toDateString();
   const lastJoinedMember = ctx.message.new_chat_members[ctx.message.new_chat_members.length - 1];
