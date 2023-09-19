@@ -38,4 +38,3 @@ jobs:
         run: |
           eb init --platform Docker --region ${{ secrets.AWS_DEFAULT_REGION }}
           eb deploy
-
