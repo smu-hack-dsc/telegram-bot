@@ -37,6 +37,5 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           eb init --platform Docker --region ${{ secrets.AWS_DEFAULT_REGION }}
-          eb create Telegram-bot-env --single --instance-type t2.micro
           eb deploy
 
