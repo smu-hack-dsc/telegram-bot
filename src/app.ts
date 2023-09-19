@@ -28,7 +28,7 @@ bot.on('text', (ctx) => {
     const joinTime = userJoinTimes[userId];
     
     console.log(joinTime, currentTime, currentTime - joinTime)
-    if (currentTime - joinTime < 300) {
+    if (currentTime - joinTime < 604800) {
       ctx.deleteMessage();
       ctx.reply(`Hi ${ctx.from.username}! New users are temporarily disabled from sending messages to prevent spam.`);
       return;
