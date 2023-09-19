@@ -1,7 +1,8 @@
-require ('dotenv').config();
 import { Context, Telegraf } from 'telegraf';
+import * as dotenv from 'dotenv';
 import * as cron from 'node-cron';
 
+dotenv.config();
 const bot: Telegraf<Context> = new Telegraf(process.env.BOT_TOKEN as string);
 
 let joinedToday: Record<string, boolean> = {};
