@@ -24,7 +24,7 @@ jobs:
       - name: Init EB CLI
         run: |
           eb init --platform node.js --region ${{secrets.AWS_DEFAULT_REGION }}
-          eb setenv key=${{secrets.TELEGRAM_BOT_TOKEN}}
+          eb setenv BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}}
       - name: Deploy to Elastic Beanstalk
         run: |
           eb deploy Telegram-bot-env
