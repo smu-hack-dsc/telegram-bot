@@ -2,7 +2,7 @@ name: EB deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
           pip install awsebcli
       - name: Init EB CLI
         run: |
-          eb init
+          eb init --platform node.js --region ${{secrets.AWS_DEFAULT_REGION }}
       - name: Deploy to Elastic Beanstalk
         run: |
           eb deploy
