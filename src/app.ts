@@ -1,11 +1,10 @@
 import { Context, Telegraf } from 'telegraf';
 import * as dotenv from 'dotenv';
-import * as cron from 'node-cron';
 
 dotenv.config();
 const bot: Telegraf<Context> = new Telegraf(process.env.BOT_TOKEN as string);
 
-let userJoinTimes: Record<string, number> = {};
+const userJoinTimes: Record<string, number> = {};
 
 bot.on('new_chat_members', (ctx) => {
   const today = new Date().toDateString();
